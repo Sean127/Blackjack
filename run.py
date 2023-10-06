@@ -3,54 +3,55 @@ import random
 deck = ['Ace', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'Jack', 'Queen', 'King']*4
 
 
-def deal_player_hands(deck):
-    ''' Creates Players hand '''
-    player_hand = []
-
+def deal_hands(deck):
+    ''' Creates hands for player and dealer '''
+    hand = []
     for i in range(2):
         random.shuffle(deck)
         card = deck.pop()
-        player_hand.append(card)
-    return player_hand
+        hand.append(card)
+    return hand
 
 
-def deal_dealer_hand(deck):
-    ''' Creates Dealers hand '''
-    dealer_hand = []
-
-    for i in range(2):
-        random.shuffle(deck)
-        card = deck.pop()
-        dealer_hand.append(card)
-    return dealer_hand
-
-
-def total(player_hand, dealer_hand):
+def total(hand):
     ''' Calculate hand total'''
-    player_total = 0
-    dealer_total = 0
+    total = 0
 
-    for card in player_hand:
+    for card in hand:
         if card in ['Jack', 'Queen', 'King']:
-            player_total += 10
+            total += 10
         elif card == 'Ace':
-            player_total += 11
+            total += 11
         else:
-            player_total += card
+            total += card
 
-    for card in dealer_hand:
-        if card in ['Jack', 'Queen', 'King']:
-            dealer_total += 10
-        elif card == 'Ace':
-            dealer_total += 11
-        else:
-            dealer_total += card
-
-    return player_total, dealer_total
+    return hand
 
 
-def hit(player_hand):
+def hit(hand):
     ''' Add ability to "hit" the dealer '''
     card = deck.pop()
-    player_hand.append(card)
-    return player_hand
+    hand.append(card)
+    return hand
+
+
+def game():
+    hand = deal_hands(deck)
+    play = False
+    
+    print("Welcome to Blackjack!")
+    print("To win get closer to 21 than the dealer")
+    print("Go over however, and you lose!")
+
+    while play is False:
+       
+        start = input('Type "enter" to begin or "quit" to quit').lower()
+        if start == "enter":
+            print(hand)
+            
+
+def main():
+    game()
+
+
+main()
