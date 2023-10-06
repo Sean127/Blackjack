@@ -25,3 +25,32 @@ def deal_dealer_hand(deck):
     return dealer_hand
 
 
+def total(player_hand, dealer_hand):
+    ''' Calculate hand total'''
+    player_total = 0
+    dealer_total = 0
+
+    for card in player_hand:
+        if card in ['Jack', 'Queen', 'King']:
+            player_total += 10
+        elif card == 'Ace':
+            player_total += 11
+        else:
+            player_total += card
+
+    for card in dealer_hand:
+        if card in ['Jack', 'Queen', 'King']:
+            dealer_total += 10
+        elif card == 'Ace':
+            dealer_total += 11
+        else:
+            dealer_total += card
+
+    return player_total, dealer_total
+
+
+def hit(player_hand):
+    ''' Add ability to "hit" the dealer '''
+    card = deck.pop()
+    player_hand.append(card)
+    return player_hand
